@@ -22,11 +22,12 @@ class Controller extends BaseController
 			$data[] = [
 				'id' => $i+1,
 				'title' => $faker->jobTitle(),
-				'description' => $faker->sentence(3),
+				'description' => "<strong>" . $faker->sentence(3) . "</strong>",
 				'author' => $faker->name(),
 				'created_at' => now()
 			];
 		}
+
 		return $data;
 	}
 }
