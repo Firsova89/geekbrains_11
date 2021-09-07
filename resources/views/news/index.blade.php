@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <div class="small text-muted">{{ now()->format('d-m-Y H:i') }}</div>
                         <h2 class="card-title h4">{{ $news['title'] }}</h2>
+                        <p>Категория:{{$news['categorie_title']}}</p>
                         <p class="card-text">{!! $news['description'] !!}</p>
                         <a class="btn btn-primary" href="{{ route('news.show', ['id' => $news['id']]) }}">Читать далее →</a>
                     </div>
