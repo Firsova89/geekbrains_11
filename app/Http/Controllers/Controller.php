@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Factory;
+use App\Models\News;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,19 +15,6 @@ class Controller extends BaseController
 
 	protected function getNews(): array
 	{
-		$faker = Factory::create('ru_RU');
-		$data = [];
-		$countNumber = mt_rand(5,15);
-		for($i=0; $i<$countNumber; $i++) {
-			$data[] = [
-				'id' => $i+1,
-				'title' => $faker->jobTitle(),
-				'description' => "<strong>" . $faker->sentence(3) . "</strong>",
-				'author' => $faker->name(),
-				'created_at' => now()
-			];
-		}
-
-		return $data;
+		return News::getNews();
 	}
 }

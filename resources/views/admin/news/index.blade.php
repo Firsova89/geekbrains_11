@@ -21,13 +21,13 @@
 	  <th>Управление</th>
 	 </tr>
 	</thead>
-	 
+
 		 <tbody>
 		 @forelse($newsList as $news)
 		 <tr>
 			 <td>{{ $news['id'] }}</td>
 			 <td>{{ $news['title'] }}</td>
-			 <td>{{ $news['description'] }}</td>
+			 <td>{!! $news['description']  !!}</td>
 			 <td>{{ now()->format('d-m-Y H:i') }}</td>
 			 <td>
 				  <a href="">Ред.</a>
