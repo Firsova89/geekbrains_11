@@ -20,10 +20,8 @@
 <!-- Page content-->
 <div class="container">
     <div class="row">
-        <!-- Blog entries-->
         @yield('content')
-        <!-- Side widgets-->
-        <x-sidebar></x-sidebar>
+        @yield('sidebar')
     </div>
 </div>
 <!-- Footer-->

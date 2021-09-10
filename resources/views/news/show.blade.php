@@ -7,16 +7,14 @@
         <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
     </a>
     <div class="card-body">
-        <div class="small text-muted">{{ $id }}</div>
-        <h2 class="card-title">Featured Post Title</h2>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-        <a class="btn btn-primary" href="#!">Read more →</a>
+        <div class="small text-muted">{{ now()->format('d-m-Y H:i') }}</div>
+        <h2 class="card-title h4">{{ $news['title'] }}</h2>
+        <p>Категория:{{$news['categorie_title']}}</p>
+        <p class="card-text">{!! $news['description'] !!}</p>
     </div>
 </div>
 </div>
 @endsection
-@push('js')
-    <script>
-        alert("Hello!");
-    </script>
-@endpush
+@section('sidebar')
+    @include('layouts.categoriessidebar')
+@endsection

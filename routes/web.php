@@ -24,16 +24,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
    Route::resource('news', AdminNewsController::class);
 });
 
-Route::get('/news', [NewsController::class, 'index'])
-	->name('news');
+Route::redirect('/news/','/news/category/ALL');
 
-Route::get('/newsbycategory/{id}', [NewsController::class, 'news_by_category'])
-    ->where('id', '\d+')
-    ->name('newsbycategory');
+Route::get('/news/category/{category}', [NewsController::class, 'index'])
+    ->name('news.index');
 
-
-Route::get('/news_categories', [NewsController::class, 'categories'])
-	->name('news.categories');
 
 Route::get('/news/{id}', [NewsController::class, 'show'])
 	->where('id', '\d+')
