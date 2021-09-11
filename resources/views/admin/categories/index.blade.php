@@ -21,6 +21,20 @@
                 </thead>
 
                 <tbody>
+                @forelse($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->title }}</td>
+                        <td>{{ $category->created_at }}</td>
+                        <td>
+                            <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}">Ред.</a>
+                            &nbsp;
+                            <a href="">Уд.</a>
+                        </td>
+                    </tr>
+                @empty
+                    <h2>Категорий нет</h2>
+                @endforelse
 
                 </tbody>
 
