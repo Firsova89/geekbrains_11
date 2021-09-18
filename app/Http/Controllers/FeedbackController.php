@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Feedbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +17,9 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-		return view('feedback.index');
+        $model = new Feedbacks();
+        return view('feedback.index',
+            ["feedbacks" => $model->getFeedbacks()]);
     }
 
     /**
@@ -26,7 +29,6 @@ class FeedbackController extends Controller
      */
     public function create(Request $request)
     {
-
         return view('admin.news.create');
     }
 
@@ -42,6 +44,9 @@ class FeedbackController extends Controller
 			'name' => ['required', 'string', 'min:3'],
             'feedback' => ['required', 'string', 'min:3'],
 		]);
+        $model = new Feedbacks();
+        $model->addFeedback($request->input('name'),$request->input('feedback'));
+
         Session::flash('message', 'Отзыв успешно отправлен');
         Session::flash('alert-class', 'alert-success');
 

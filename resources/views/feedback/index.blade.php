@@ -34,5 +34,27 @@
         </div>
     </div>
 
+    <div class="col-lg-8">
+
+        <!-- Nested row for non-featured blog posts-->
+        <div class="row">
+            <div class="col-lg-6">
+                @forelse($feedbacks as $feedback)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2>{{ $feedback->username }}</h2>
+                        <p>{{ $feedback->userfeedback }}</p>
+                    </div>
+                </div>
+
+                @empty
+                    <h2>Отзывов нет</h2>
+                @endforelse
+
+            </div>
+
+        </div>
+    </div>
+
 @endsection
 
