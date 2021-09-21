@@ -21,12 +21,12 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">Имя</label>
-                    <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                    <input type="text" class="form-control" name="username" id="username" value="{{ old('username') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Отзыв</label>
-                    <textarea class="form-control" name="feedback" id="feedback">{{ old('feedback') }}</textarea>
+                    <textarea class="form-control" name="userfeedback" id="userfeedback">{{ old('userfeedback') }}</textarea>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-success">Отправить</button>

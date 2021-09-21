@@ -17,9 +17,10 @@ class FeedbackController extends Controller
      */
     public function index()
     {
+        $feedbacks = Feedbacks::get();
         $model = new Feedbacks();
         return view('feedback.index',
-            ["feedbacks" => $model->getFeedbacks()]);
+            ["feedbacks" => $feedbacks] );
     }
 
     /**
@@ -41,14 +42,25 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
 		$request->validate([
-			'name' => ['required', 'string', 'min:3'],
-            'feedback' => ['required', 'string', 'min:3'],
+			'username' => ['required', 'string', 'min:3'],
+            'userfeedback' => ['required', 'string', 'min:3'],
 		]);
         $model = new Feedbacks();
-        $model->addFeedback($request->input('name'),$request->input('feedback'));
+        $model->addFeedback($request->input('username'),$request->input('userfeedback'));
 
-        Session::flash('message', 'Отзыв успешно отправлен');
-        Session::flash('alert-class', 'alert-success');
+        $feedback = Feedbacks::create(
+            $request->only(['username', 'userfeedback'])
+        );
+
+        if ($feedback) {
+            Session::flash('message', 'Отзыв успешно отправлен');
+            Session::flash('alert-class', 'alert-success');
+        }
+        else
+        {
+            Session::flash('message', 'Ошибка');
+            Session::flash('alert-class', 'alert-danger');
+        }
 
         return redirect()->route('feedback');
     }

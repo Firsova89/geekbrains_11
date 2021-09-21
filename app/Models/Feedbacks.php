@@ -8,6 +8,9 @@ class Feedbacks extends Model
 {
 
 	protected $table = "feedbacks";
+    protected $guarded = [
+        'id'
+    ];
 
 	public function getFeedbacks()
 	{
