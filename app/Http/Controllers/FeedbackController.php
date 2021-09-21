@@ -45,8 +45,6 @@ class FeedbackController extends Controller
 			'username' => ['required', 'string', 'min:3'],
             'userfeedback' => ['required', 'string', 'min:3'],
 		]);
-        $model = new Feedbacks();
-        $model->addFeedback($request->input('username'),$request->input('userfeedback'));
 
         $feedback = Feedbacks::create(
             $request->only(['username', 'userfeedback'])
