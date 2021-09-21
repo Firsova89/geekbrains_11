@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\Admin\IndexController as AdminController;
+use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 /*
@@ -19,11 +21,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-   Route::resource('categories', AdminCategoryController::class);
-   Route::resource('news', AdminNewsController::class);
+//auth
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/account', AccountController::class)
+		->name('account');
+	Route::get('/logout', function() {
+		\Auth::logout();
+		return redirect()->route('login');
+	})->name('logout');
+
+	//admin
+	Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function() {
+		Route::get('/', AdminController::class)
+			->name('index');
+		Route::resource('categories', AdminCategoryController::class);
+		Route::resource('news', AdminNewsController::class);
+	});
 });
+
 
 
 
@@ -40,3 +55,23 @@ Route::get('/collections', function() {
 
 	dump($collect->shuffle()->map(fn($item) => $item + 2)->toJson());
 });
+
+
+Route::get('/session', function () {
+	if(!session()->has('demo')) {
+		session(['demo' => 1]);  //->put('demo', 1);
+	}
+
+	dump(session()->all());
+	session()->remove('demo');
+
+	dump(session()->all());
+
+	return redirect()->route('admin.news.index')->withCookie(['one' => 'one']);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+	->name('home');
+
