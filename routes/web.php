@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
@@ -36,6 +38,9 @@ Route::group(['middleware' => 'auth'], function() {
 			->name('index');
 		Route::resource('categories', AdminCategoryController::class);
 		Route::resource('news', AdminNewsController::class);
+
+		Route::get('/parser', ParserController::class)
+			->name('parser');
 	});
 });
 
@@ -70,6 +75,12 @@ Route::get('/session', function () {
 	return redirect()->route('admin.news.index')->withCookie(['one' => 'one']);
 });
 
+Route::group(['middleware' => 'guest'], function() {
+	Route::get('/vk/start', [SocialController::class, 'start'])
+		->name('vk.start');
+	Route::get('/vk/callback', [SocialController::class, 'callback'])
+		->name('vk.callback');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])

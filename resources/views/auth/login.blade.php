@@ -7,7 +7,9 @@
             <div class="card">
                 <div class="card-header">{{ __('Вход') }}</div>
 
+
                 <div class="card-body">
+                    <br><a href="{{ route('vk.start') }}">Авторизация через ВК</a><br><br>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
