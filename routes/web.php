@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 /*
@@ -40,3 +41,9 @@ Route::get('/collections', function() {
 
 	dump($collect->shuffle()->map(fn($item) => $item + 2)->toJson());
 });
+
+
+Route::get('/feedback', [FeedbackController::class, 'index'])
+    ->name('feedback');
+Route::post('/feedback', [FeedbackController::class, 'store'])
+    ->name('feedback.store');
