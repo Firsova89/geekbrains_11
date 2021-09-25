@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeedbackAddRequest;
 use App\Models\Feedbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -39,28 +40,22 @@ class FeedbackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeedbackAddRequest $request)
     {
-		$request->validate([
-			'username' => ['required', 'string', 'min:3'],
-            'userfeedback' => ['required', 'string', 'min:3'],
-		]);
 
-        $feedback = Feedbacks::create(
-            $request->only(['username', 'userfeedback'])
-        );
+        $feedback = Feedbacks::create($request->validated());
 
         if ($feedback) {
-            Session::flash('message', 'Отзыв успешно отправлен');
-            Session::flash('alert-class', 'alert-success');
+            return redirect()
+                ->route('feedback')
+                ->with('success', __('messages.feedback.create.success'));
         }
         else
         {
-            Session::flash('message', 'Ошибка');
-            Session::flash('alert-class', 'alert-danger');
+            return redirect()
+                ->route('feedback')
+                ->with('success', __('messages.feedback.create.fail'));
         }
-
-        return redirect()->route('feedback');
     }
 
 }

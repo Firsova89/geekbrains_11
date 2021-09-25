@@ -9,14 +9,8 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @if(Session::has('message'))
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-            @endif
+            @include('inc.messages')
+
             <form method="post" action="{{ route('feedback.store') }}">
                 @csrf
                 <div class="form-group">
