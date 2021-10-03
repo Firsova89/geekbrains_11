@@ -24,4 +24,20 @@ class SocialController extends Controller
 			//something there
 		}
 	}
+    public function startFB()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function callbackFB(Social $service)
+    {
+        try {
+            return redirect($service->socialLogin(
+                Socialite::driver('facebook')->user()
+            ));
+        }catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            //something there
+        }
+    }
 }

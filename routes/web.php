@@ -80,6 +80,10 @@ Route::group(['middleware' => 'guest'], function() {
 		->name('vk.start');
 	Route::get('/vk/callback', [SocialController::class, 'callback'])
 		->name('vk.callback');
+    Route::get('/facebook/start', [SocialController::class, 'startFB'])
+        ->name('facebook.start');
+    Route::get('/facebook/callback', [SocialController::class, 'callbackFB'])
+        ->name('facebook.callback');
 });
 Auth::routes();
 

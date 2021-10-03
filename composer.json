@@ -5,7 +5,8 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
+        "doctrine/dbal": "^3.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
@@ -14,7 +15,9 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "orchestra/parser": "^6.1",
-        "socialiteproviders/vkontakte": "^4.2"
+        "socialiteproviders/facebook": "^4.1",
+        "socialiteproviders/vkontakte": "^4.2",
+      "ext-xml": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

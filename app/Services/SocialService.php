@@ -14,14 +14,18 @@ class SocialService implements Social
 	   if($checkUser) {
 		   $checkUser->name = $user->getName();
 		   $checkUser->avatar = $user->getAvatar();
+	   } else {
+           $checkUser = new Model();
+           $checkUser->name = $user->getName();
+           $checkUser->email = $user->getEmail();
+           $checkUser->avatar = $user->getAvatar();
+           $checkUser->password = null;
+       }
 
-		   if($checkUser->save()) {
-			   \Auth::loginUsingId($checkUser->id);
-			   return route('account');
-		   }
-	   }
-
-	   //register ...
+	   if($checkUser && $checkUser->save()) {
+           \Auth::loginUsingId($checkUser->id);
+           return route('account');
+       }
 
 	   throw new \Exception("Error social login");
    }

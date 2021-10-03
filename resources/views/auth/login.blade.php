@@ -9,6 +9,7 @@
 
 
                 <div class="card-body">
+                    <br><a href="{{ route('facebook.start') }}">Авторизация через Facebook</a><br><br>
                     <br><a href="{{ route('vk.start') }}">Авторизация через ВК</a><br><br>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
